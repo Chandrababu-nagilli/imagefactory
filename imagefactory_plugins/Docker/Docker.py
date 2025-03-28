@@ -399,6 +399,11 @@ class Docker(object):
                 arch = "amd64"
             elif arch == "armv7hl":
                 arch = "armhfp"
+            elif arch == "s390x":
+                arch = "s390x"
+            # Adding s390x specific configuration if needed
+            if arch == "s390x" and os_name == "rhel9":
+                self.log.debug("Applying specific settings for rhel9 s390x")
             tdict = { }
             tdict['commentstring'] = parameters.get('comment', 'Created by Image Factory')
             tdict['os'] = parameters.get('os', 'linux')

@@ -1320,8 +1320,11 @@ class VirtualBoxOVFDescriptor(object):
         elif self.arch == 'i386':
             os_id = '79'
             os_desc = 'RedHat'
+        elif self.arch == 's390x':  # Added support for RHEL9 on s390x
+            os_id = '81'  # Hypothetical ID; adjust based on VirtualBox's mapping
+            os_desc = 'RedHat_64_s390x'
         else:
-            raise ImageFactoryException("Virtualbox OVF architecture must be i386 or x86_64")
+            raise ImageFactoryException("Virtualbox OVF architecture must be i386, x86_64, or s390x")
 
         # Variable items
         box_conf = { 'diskfile': self.disk_image_name,

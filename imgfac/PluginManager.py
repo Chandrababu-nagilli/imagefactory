@@ -143,6 +143,11 @@ class PluginManager(Singleton):
             elif isinstance(target, tuple):
                 _target = list(target)
                 self.log.debug("Attempting to match list target (%s)" % (str(_target)))
+                
+                # Add s390x-specific logging for clarity
+                if 's390x' in _target:
+                    self.log.info("Target involves s390x architecture. Checking plugin compatibility...")
+                    
                 for index in range(1, len(target) + 1):
                     plugin_name = self._targets.get(tuple(_target))
                     if not plugin_name:

@@ -293,8 +293,8 @@ rm -f /core*
 %post --nochroot
 cp $INSTALL_ROOT/usr/share/doc/*-release-*/GPL $LIVE_ROOT/GPL
 
-# only works on x86, x86_64
-if [ "$(uname -i)" = "i386" -o "$(uname -i)" = "x86_64" ]; then
+# support for x86, x86_64, and s390x
+if [ "$(uname -i)" = "i386" ] || [ "$(uname -i)" = "x86_64" ] || [ "$(uname -m)" = "s390x" ]; then
   if [ ! -d $LIVE_ROOT/LiveOS ]; then mkdir -p $LIVE_ROOT/LiveOS ; fi
   cp /usr/bin/livecd-iso-to-disk $LIVE_ROOT/LiveOS
 fi

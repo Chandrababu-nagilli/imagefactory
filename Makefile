@@ -2,19 +2,19 @@ sdist:
 	python3 setup.py sdist
 
 signed-rpm: sdist
-	rpmbuild -ba imagefactory.spec --sign --define "_sourcedir `pwd`/dist"
+	rpmbuild -ba imagefactory.spec --define "_sourcedir `pwd`/dist" --define "__python /usr/bin/python3"
 
 rpm: sdist
-	rpmbuild -ba imagefactory.spec --define "_sourcedir `pwd`/dist"
+	rpmbuild -ba imagefactory.spec --define "_sourcedir `pwd`/dist" --define "__python /usr/bin/python3"
 
 srpm: sdist
-	rpmbuild -bs imagefactory.spec --define "_sourcedir `pwd`/dist"
+	rpmbuild -bs imagefactory.spec --define "_sourcedir `pwd`/dist" --define "__python /usr/bin/python3"
 
 pylint:
-	pylint --rcfile=pylint.conf imagefactory imgfac
+	@python3 -m pylint --rcfile=pylint.conf imagefactory imgfac
 
 unittests:
-	python3 -m unittest discover -v
+	PYTHONPATH=. python3 -m unittest tests.testReservationManager
 
 clean:
 	rm -rf MANIFEST build dist imagefactory.spec
